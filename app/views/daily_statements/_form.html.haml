@@ -1,0 +1,73 @@
+= form_for @daily_statement do |f|
+  - if @daily_statement.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@daily_statement.errors.count, "error")} prohibited this daily_statement from being saved:"
+      %ul
+        - @daily_statement.errors.full_messages.each do |message|
+          %li= message
+
+  .table-responsive
+    %table.table.table-striped.table-hover.table-sm.table-bordered
+      %tbody
+        %tr
+          %th=t("chamber_name")
+          %td= f.select :chamber_id, Chamber.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }
+        %tr
+          %th=t("age_days")
+          %td=f.number_field :age_days
+        %tr
+          %th=t("age_weeks")
+          %td= f.number_field :age_weeks
+        %tr
+          %th=t("total_count")
+          %td= f.number_field :total_count
+        %tr
+          %th=t("deceased")
+          %td= f.number_field :deceased
+        %tr
+          %th=t("remaining")
+          %td= f.number_field :remaining
+        %tr
+          %th=t("consumed_food")
+          %td= f.text_field :consumed_food
+        %tr
+          %th=t("consumed_water")
+          %td= f.text_field :consumed_water
+        %tr
+          %th=t("daily_production")
+          %td= f.text_field :daily_production
+        %tr
+          %th=t("production_ratio")
+          %td= f.text_field :production_ratio
+        %tr
+          %th=t("highest_temp")
+          %td= f.text_field :highest_temp
+        %tr
+          %th=t("lowest_temp")
+          %td= f.text_field :lowest_temp
+        %tr
+          %th=t("humidity_ratio")
+          %td= f.text_field :humidity_ratio
+        %tr
+          %th=t("day")
+          %td= "#{I18n.t('day_names')[Time.now.wday]} #{time_in_day(Time.now)}"
+        - unless @daily_statement.present?
+          %tr
+            %th
+            %td
+              =link_to daily_statement_path(@daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: @daily_statement.id) } do |i| 
+                %i.bi.bi-eye
+          %tr
+            %th
+            %td
+              =link_to edit_daily_statement_path(@daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: @daily_statement.id) } do |i| 
+                %i.bi.bi-pencil-square
+    -# .py-3
+    -#   .col-md-6.text-center
+    -#     = link_to "#", { onclick: "$('#form_id').submit()", class: "btn alpha mx-1" } do
+    -#       %i.bi.bi-arrow-right-circle
+    -#       Submit
+
+
+    .actions
+      = f.submit 'Save'

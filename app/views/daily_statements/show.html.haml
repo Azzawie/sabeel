@@ -1,0 +1,72 @@
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("show_daily_statement"), objekt: @daily_statement
+.table-responsive
+  %table.table.table-striped.table-hover.table-sm.table-bordered
+    %tbody
+      %tr
+        %th=t("chamber_name")
+        %td= link_to @daily_statement.chamber.name, chamber_path(@daily_statement.chamber)
+      %tr
+        %th=t("age_days")
+        %td= @daily_statement.age_days
+      %tr
+        %th=t("age_weeks")
+        %td= @daily_statement.age_weeks
+      %tr
+        %th=t("total_count")
+        %td= @daily_statement.total_count
+      %tr
+        %th=t("deceased")
+        %td= @daily_statement.deceased
+      %tr
+        %th=t("remaining")
+        %td= @daily_statement.remaining
+      %tr
+        %th=t("consumed_food")
+        %td= @daily_statement.consumed_food
+      %tr
+        %th=t("consumed_water")
+        %td= @daily_statement.consumed_water
+      %tr
+        %th=t("daily_production")
+        %td= @daily_statement.daily_production
+      %tr
+        %th=t("production_ratio")
+        %td= @daily_statement.production_ratio
+      %tr
+        %th=t("highest_temp")
+        %td= @daily_statement.highest_temp
+      %tr
+        %th=t("lowest_temp")
+        %td= @daily_statement.lowest_temp
+      %tr
+        %th=t("humidity_ratio")
+        %td= @daily_statement.humidity_ratio
+      %tr
+        %th=t("date")
+        %td= @daily_statement.created_at.strftime('%Y-%m-%d')
+      %tr
+        %th=t("day")
+        %td= I18n.t('day_names')[@daily_statement.created_at.wday]
+      %tr
+        %th=t("time")
+        %td= time_in_day(@daily_statement.created_at)
+      %tr
+        %th
+        %td
+          =link_to daily_statement_path(@daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: @daily_statement.id) } do |i| 
+            %i.bi.bi-eye
+      %tr
+        %th
+        %td
+          =link_to edit_daily_statement_path(@daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: @daily_statement.id) } do |i| 
+            %i.bi.bi-pencil-square
+
+.py-3
+  .col-md-6.text-center
+    = link_to daily_statements_path, { class: "btn alpha mx-1" } do
+      %i.bi.bi-arrow-right-circle
+      =t("back") 
+
+    = link_to edit_daily_statement_path(@daily_statement), { class: "btn alpha mx-1" }  do
+      %i.bi.bi-pencil-square
+      %span=t("edit", page_name: @daily_statement.id)

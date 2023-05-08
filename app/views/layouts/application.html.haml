@@ -1,0 +1,28 @@
+:ruby 
+  lang = "en"
+  dir = "ltr"
+  if I18n.locale == :ar
+    lang = "ar"
+    dir = "rtl"
+  end
+
+!!!
+%html{ lang: lang, dir: dir }
+  %head
+    %lang
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Sabeel
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+  %body
+    .container-fluid
+      .row.pt-5
+        .col-sm-1
+          = render "layouts/sidebar"
+        .col-sm-10
+          = yield
+

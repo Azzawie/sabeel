@@ -1,0 +1,135 @@
+:ruby
+  controller_name = controller_name
+  action_name = action_name
+  page_namee = page_name
+  objekt = objekt
+
+
+%p#notice= notice
+.py-5.text-center
+  %h3=page_name
+
+%nav.navbar.navbar-light{style: 
+  "background-color: #f2f2f2;
+  border-style: solid;
+  border: 2px solid #e4e4e4;
+  border-radius: 5px;
+  margin: 10px auto;
+  padding: 0px 90px;
+"}
+
+  .col-12
+    = link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel")} do 
+      %i.bi.bi-file-earmark-excel.fs-4
+    =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf") } do 
+      %i.bi.bi-filetype-pdf.fs-4
+
+    -if action_name == "show"
+      =link_to edit_polymorphic_path(objekt),{ "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf") } do
+        %i.bi.bi-pencil-square.fs-4
+      = link_to "<i class = 'bi bi-trash3 fs-4'></i>".html_safe, objekt, data: { "turbo-method": :delete, controller: controller_name, "confirmation-message-value": 'Are you sure?', action: "#{controller_name}#destroy"}
+
+    -elsif action_name == "index"
+      =link_to "<i class='bi bi-pencil-square fs-4'></i>".html_safe, "#{controller_name}/new",{ "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf") } 
+        
+
+
+
+
+
+
+
+  -#     - if controller_name == "daily_statements"
+  -#       - if action_name == 'index'
+  -#         .col-12.text-center
+  -#           -# %h3=t("listing_daily_statements")
+  -#         .col-md-4.text-right
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel") } do 
+  -#             %i.bi.bi-file-earmark-excel
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-filetype-pdf
+  -#           = link_to new_daily_statement_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("new_daily_statement"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-file-earmark-plus
+
+  -#       - elsif action_name == 'new'
+  -#         .col-12.text-center
+  -#           -# %h3=t("listing_daily_statements")
+  -#         .col-md-4.text-right
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-file-earmark-excel
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-filetype-pdf
+
+  -#       - elsif action_name == 'show'
+  -#         -# %h3=t("listing_daily_statements")
+  -#         =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel")} do 
+  -#           %i.bi.bi-file-earmark-excel.fs-3
+  -#         =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf") } do 
+  -#           %i.bi.bi-filetype-pdf.fs-3
+
+
+
+  -#     - elsif controller_name == "chambers"
+  -#       - if action_name == 'show'
+  -#         .col-12.text-center
+  -#           -# %h3=t("listing_chambers")
+  -#         .col-md-4.text-right.btn-group.btn-group-sm
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-file-earmark-excel
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-filetype-pdf
+
+  -#       - elsif action_name == 'index'
+  -#         .col-12.text-center
+  -#           -# %h3=t("listing_chambers")
+  -#         .col-md-4.text-right.btn-group.btn-group-sm
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-file-earmark-excel
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-filetype-pdf
+  -#           = link_to new_chamber_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("new"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-file-earmark-plus
+            
+  -#       - elsif action_name == 'edit'
+  -#         .col-12.text-center
+  -#           -# %h3=t("listing_chambers")
+  -#         .col-md-4.text-right.btn-group.btn-group-sm
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-file-earmark-excel
+  -#           =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-filetype-pdf
+  -#           = link_to new_chamber_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("new"), class: "btn alpha btn-sm mx-2" } do 
+  -#             %i.bi.bi-file-earmark-plus
+
+  -#     -else
+  -#       %P NO NAVBAR DEFINED
+
+
+
+
+
+
+
+  -# -# If you are trying to special case something in a view, you can use current_page? as in:
+
+  -# -# <% if current_page?(:controller => 'users', :action => 'index') %>
+  -# -# ...or an action and id...
+
+  -# -# <% if current_page?(:controller => 'users', :action => 'show', :id => 1) %>
+  -# -# ...or a named route...
+
+  -# -# <% if current_page?(users_path) %>
+  -# -# ...and
+
+  -# -# <% if current_page?(user_path(1)) %>
+  -# -# Because current_page? requires both a controller and action, when I care about just the controller I make a current_controller? method in ApplicationController:
+
+  -# -#   def current_controller?(names)
+  -# -#     names.include?(current_controller)
+  -# -#   end
+  -# -# And use it like this:
+
+  -# -# <% if current_controller?('users') %>
+  -# -# ...which also works with multiple controller names...
+
+  -# -# <% if current_controller?(['users', 'comments']) %>

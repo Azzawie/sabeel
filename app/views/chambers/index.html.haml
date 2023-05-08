@@ -1,0 +1,29 @@
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("listing_chambers"), objekt: Chamber.new
+.table-responsive
+  %table.table.table-striped.table-hover.table-sm.table-bordered
+    %thead
+      %tr
+        %th=t("name")
+        %th=t("description")
+        %th=t("notes")
+        %th=t("date")
+        %th=t("day")
+        %th=t("time")
+        %th
+        %th
+
+    %tbody
+      - @chambers.each do |chamber|
+        %tr
+          %td= chamber.name
+          %td= truncate(chamber.description, {})
+          %td= truncate(chamber.notes, {})
+          %td= chamber.created_at.strftime('%Y-%m-%d')
+          %td= I18n.t('day_names')[chamber.created_at.wday]
+          %td= time_in_day(chamber.created_at)
+          %td
+            =link_to chamber_path(chamber), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: chamber.id) } do |i| 
+              %i.bi.bi-eye
+          %td
+            =link_to edit_chamber_path(chamber), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: chamber.id) } do |i| 
+              %i.bi.bi-pencil-square

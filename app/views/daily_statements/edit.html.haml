@@ -1,0 +1,15 @@
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("show_daily_statement")
+
+%h1 Editing daily_statement
+
+= render 'form'
+
+.py-3
+  .col-md-6.text-center
+    = link_to daily_statements_path, { class: "btn alpha mx-1" } do
+      %i.bi.bi-arrow-right-circle
+      =t("back") 
+
+    = link_to @daily_statement, { class: "btn alpha mx-1" }  do
+      %i.bi.bi-eye
+      %span=t("Show")

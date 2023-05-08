@@ -1,0 +1,59 @@
+# == Schema Information
+#
+# Table name: daily_statements
+#
+#  id               :bigint           not null, primary key
+#  age_days         :integer
+#  age_weeks        :integer
+#  consumed_food    :float
+#  consumed_water   :float
+#  daily_production :float
+#  deceased         :integer
+#  highest_temp     :float
+#  humidity_ratio   :float
+#  lowest_temp      :float
+#  production_ratio :float
+#  remaining        :integer
+#  total_count      :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  chamber_id       :bigint           not null
+#
+# Indexes
+#
+#  index_daily_statements_on_chamber_id  (chamber_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (chamber_id => chambers.id)
+#
+
+one:
+  age_days: 1
+  age_weeks: 1
+  total_count: 1
+  deceased: 1
+  remaining: 1
+  consumed_food: 1.5
+  consumed_water: 1.5
+  daily_production: 1.5
+  production_ratio: 1.5
+  highest_temp: 1.5
+  lowest_temp: 1.5
+  humidity_ratio: 1.5
+  chamber: one
+
+two:
+  age_days: 1
+  age_weeks: 1
+  total_count: 1
+  deceased: 1
+  remaining: 1
+  consumed_food: 1.5
+  consumed_water: 1.5
+  daily_production: 1.5
+  production_ratio: 1.5
+  highest_temp: 1.5
+  lowest_temp: 1.5
+  humidity_ratio: 1.5
+  chamber: two

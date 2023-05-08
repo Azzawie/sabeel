@@ -1,0 +1,39 @@
+en:
+  chamber_name: Chamber name
+  description: Description
+  notes: Notes
+  age_days: Age in days
+  age_weeks: Age in weeks
+  total_count: Total count
+  deceased: Deceased
+  remaining: Remaining
+  consumed_food: Consumed food
+  consumed_water: Consumed water
+  daily_production: Daily production
+  production_ratio: Production ratio
+  highest_temp: Highest temp.
+  lowest_temp: Lowest temp.
+  humidity_ratio: Humidity ratio
+  date: Date
+  time: Time
+  day: Day
+  day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+  evening: Evening
+  morning: Morning
+  listing_daily_statements: Listing of daily statements
+  listing_chambers: Chabers list
+  edit: "(%{page_name}) Edit page"
+  back: Back
+  edit_record_with_number: "Edit record with number: %{record_number}"
+  view_record_with_number: "View record with number: %{record_number}"
+  chamber_name: Chamber name
+  new: New
+  save_as_pdf: Save PDF file
+  save_as_excel: Save Excel file
+  new_daily_statement: New daily statement
+  reports: Statements & Reports
+  favorite_chambers: favorite chambers
+  users: Users
+  show_chamber: Chamber details
+  show_daily_statement: Daily statement details
+  edit: Edit this record

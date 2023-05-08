@@ -1,0 +1,51 @@
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("listing_daily_statements")
+.table-responsive
+  %table.table.table-striped.table-hover.table-sm.table-bordered
+    %thead
+      %tr
+        %th=t("chamber_name")
+        %th=t("age_days")
+        %th=t("age_weeks")
+        %th=t("total_count")
+        %th=t("deceased")
+        %th=t("remaining")
+        %th=t("consumed_food")
+        %th=t("consumed_water")
+        %th=t("daily_production")
+        %th=t("production_ratio")
+        %th=t("highest_temp")
+        %th=t("lowest_temp")
+        %th=t("humidity_ratio")
+        %th=t("date")
+        %th=t("day")
+        %th=t("time")
+        %th
+        %th
+
+    %tbody
+      - @daily_statements.each do |daily_statement|
+        %tr
+          %td.text-center= link_to daily_statement.chamber.name, chamber_path(daily_statement.chamber)
+          %td.text-center= daily_statement.age_days
+          %td.text-center= daily_statement.age_weeks
+          %td.text-center= daily_statement.total_count
+          %td.text-center= daily_statement.deceased
+          %td.text-center= daily_statement.remaining
+          %td.text-center= daily_statement.consumed_food
+          %td.text-center= daily_statement.consumed_water
+          %td.text-center= daily_statement.daily_production
+          %td.text-center= daily_statement.production_ratio
+          %td.text-center= daily_statement.highest_temp
+          %td.text-center= daily_statement.lowest_temp
+          %td.text-center= daily_statement.humidity_ratio
+          %td.text-center= daily_statement.created_at.strftime('%Y-%m-%d')
+          %td.text-center= I18n.t('day_names')[daily_statement.created_at.wday]
+          %td.text-center= time_in_day(daily_statement.created_at)
+          %td.text-center
+            =link_to daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: daily_statement.id) } do |i| 
+              %i.bi.bi-eye
+          %td.text-center
+            =link_to edit_daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: daily_statement.id) } do |i| 
+              %i.bi.bi-pencil-square
+            -# = link_to "<i class = 'bi bi-trash3 fs-4'></i>".html_safe, destroy_daily_statements_path(daily_statement),{ "turbo-method": :delete }, class: "btn btn-danger ml-3"
+            = link_to 'Destroy', daily_statement, data: { "turbo-method": :delete, controller: "daily_statements", "confirmation-message-value": 'Are you sure?', action: "daily_statements#destroy"}
