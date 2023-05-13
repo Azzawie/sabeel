@@ -11,4 +11,7 @@
 #
 class Chamber < ApplicationRecord
     has_many :daily_statements, dependent: :destroy
+    def has_statements?
+        self.daily_statements.any?
+    end
 end

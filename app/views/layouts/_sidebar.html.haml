@@ -1,34 +1,34 @@
 
+
 .col-sm-7.bg-light.sticky-top
   .d-flex.flex-sm-column.flex-row.flex-nowrap.bg-light.align-items-center.sticky-top
     %a.d-block.p-3.link-dark.text-decoration-none{"data-bs-original-title" => "Icon-only", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: "/", title: ""}
-      %i.bi-bootstrap.fs-3
+      %i.fa-solid.fa-s.fa-xl
+    
     %ul.nav.nav-pills.nav-flush.flex-sm-column.flex-row.flex-nowrap.mb-auto.mx-auto.text-center.justify-content-between.w-100.px-3.align-items-center
-      %li.nav-item
-        %a.nav-link.py-3.px-2{"data-bs-original-title" => "Home", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: chambers_path, title: t("listing_chambers")}
-          %i.bi-house.fs-3
-      %li
-        %a.nav-link.py-3.px-2{"data-bs-original-title" => "Orders", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: daily_statements_path, title: t("listing_daily_statements") }
-          %i.bi-table.fs-3
-      %li
-        %a.nav-link.py-3.px-2{"data-bs-original-title" => "Dashboard", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: "#", title: t("reports")}
-          %i.bi-speedometer2.fs-3
-      %li
-        %a.nav-link.py-3.px-2{"data-bs-original-title" => "Products", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: "#", title: t("favorite_chambers")}
-          %i.bi-heart.fs-3
-      %li
-        %a.nav-link.py-3.px-2{"data-bs-original-title" => "Customers", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: "#", title: t("users")}
-          %i.bi-people.fs-3
-    .dropdown
-      %a#dropdownUser3.d-flex.align-items-center.justify-content-center.p-3.link-dark.text-decoration-none.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#"}
-        %i.bi-person-circle.h2
-      %ul.dropdown-menu.text-small.shadow{"aria-labelledby" => "dropdownUser3"}
+      - if user_signed_in?  
+        %li.nav-item
+          %a.nav-link.py-3.px-2{"data-bs-original-title" => "Home", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: chambers_path, title: t("listing_chambers")}
+            %i.fa-solid.fa-house-user.fa-xl
         %li
-          %a.dropdown-item{href: "#"} New project...
+          %a.nav-link.py-3.px-2{"data-bs-original-title" => "Orders", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: daily_statements_path, title: t("listing_daily_statements") }
+            %i.fa-solid.fa-calendar-days.fa-xl
         %li
-          %a.dropdown-item{href: "#"} Settings
-        %li
-          %a.dropdown-item{href: "#"} Profile
+          %a.nav-link.py-3.px-2{"data-bs-original-title" => "Dashboard", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: "#", title: t("reports")}
+            %i.bi-speedometer2.fs-3
+        %li.nav-item
+          %a.nav-link.py-3.px-2{"data-bs-original-title" => "Signout", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", "data-method" => :delete, href: destroy_user_session_path, title: t("devise.signout")}
+            %i.fa-solid.fa-arrow-right-from-bracket.fa-xl
+
+      - else
+        %li.nav-item
+          %a.nav-link.py-3.px-2{"data-bs-original-title" => "Signin", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: new_user_session_path, title: t("devise.signin")}
+            %i.fa-solid.fa-arrow-right-to-bracket.fa-xl
+
+        %li.nav-item
+          %a.nav-link.py-3.px-2{"data-bs-original-title" => "Signup", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: new_user_registration_path, title: t("devise.signup")}
+            %i.fa-solid.fa-user-plus.fa-xl
+
     -# .col-sm.p-3.min-vh-100
     -#   / content
     -#   %h2 A glorious Bootstrap 5 icon sidebar menu!

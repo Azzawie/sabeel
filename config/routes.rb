@@ -2,13 +2,16 @@ Rails.application.routes.draw do
   resources :daily_statements
   resources :chambers
   resources :roles
-  resources :users
+
   get 'home/index'
 
 
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'users/sessions#destroy'
+    get '/users/sign_in' => 'users/sessions#create'
+    get '/users/sign_up' => 'users/registration#new'
+
   end
 
   root 'home#index'

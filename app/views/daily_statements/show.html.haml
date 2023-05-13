@@ -50,23 +50,3 @@
       %tr
         %th=t("time")
         %td= time_in_day(@daily_statement.created_at)
-      %tr
-        %th
-        %td
-          =link_to daily_statement_path(@daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: @daily_statement.id) } do |i| 
-            %i.bi.bi-eye
-      %tr
-        %th
-        %td
-          =link_to edit_daily_statement_path(@daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: @daily_statement.id) } do |i| 
-            %i.bi.bi-pencil-square
-
-.py-3
-  .col-md-6.text-center
-    = link_to daily_statements_path, { class: "btn alpha mx-1" } do
-      %i.bi.bi-arrow-right-circle
-      =t("back") 
-
-    = link_to edit_daily_statement_path(@daily_statement), { class: "btn alpha mx-1" }  do
-      %i.bi.bi-pencil-square
-      %span=t("edit", page_name: @daily_statement.id)

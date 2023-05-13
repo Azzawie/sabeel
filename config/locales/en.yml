@@ -2,6 +2,7 @@ en:
   chamber_name: Chamber name
   description: Description
   notes: Notes
+  cancel: Cancel
   age_days: Age in days
   age_weeks: Age in weeks
   total_count: Total count
@@ -37,3 +38,10 @@ en:
   show_chamber: Chamber details
   show_daily_statement: Daily statement details
   edit: Edit this record
+  delete: Delete this record
+  home_page_content: Welcome to our all-in-one chicken hen management application! Our user-friendly tool is designed to help chicken farmers of all sizes keep track of their hens, eggs, and overall environment. With features that allow you to monitor temperature, humidity, and chicken count, you'll always have a clear picture of the health and well-being of your flock. Plus, our customizable alerts and real-time updates make it easy to stay on top of any changes in your environment, so you can take action quickly and keep your hens happy and healthy. And of course, our application still includes all the inventory management features you need, from automatic egg counting to easy data input and access. Whether you're a hobbyist or a commercial farmer, our all-in-one application can help you streamline your operations and ensure the best possible outcomes for your flock. Try it out today and see the difference it can make!
+  no_daily_statments: There are no daily statments available for this chamber!
+  devise:
+    signout: Signout
+    signin: Signin
+    signup: Signup

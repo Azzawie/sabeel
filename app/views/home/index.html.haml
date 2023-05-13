@@ -1,9 +1,5 @@
-- if user_signed_in?
-  %p= link_to("Sign out", destroy_user_session_path, method: :delete, :confirm => "Are you sure?")
-
-- else
-  %p= link_to 'Sign up', new_user_registration_path
-  %p= link_to 'Sign in', new_user_session_path
-  
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+.row.pt-5.text-center
+  %h2 Sabeel App.
+  %hr
+  %p
+    =t("home_page_content")

@@ -4,7 +4,6 @@
   page_namee = page_name
   objekt = objekt
 
-
 %p#notice= notice
 .py-5.text-center
   %h3=page_name
@@ -18,19 +17,31 @@
   padding: 0px 90px;
 "}
 
-  .col-12
-    = link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_excel")} do 
-      %i.bi.bi-file-earmark-excel.fs-4
-    =link_to root_path, { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf") } do 
-      %i.bi.bi-filetype-pdf.fs-4
+
+  .col-12.py-1
+    = link_to "<i class = 'fa-solid fa-file-csv fa-xl'></i>".html_safe, root_path, { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("save_as_excel"), class: "px-2" }
+    = link_to "<i class = 'fa-solid fa-file-pdf fa-xl'></i>".html_safe, root_path, { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("save_as_pdf"), class: "px-2" }
 
     -if action_name == "show"
-      =link_to edit_polymorphic_path(objekt),{ "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf") } do
-        %i.bi.bi-pencil-square.fs-4
-      = link_to "<i class = 'bi bi-trash3 fs-4'></i>".html_safe, objekt, data: { "turbo-method": :delete, controller: controller_name, "confirmation-message-value": 'Are you sure?', action: "#{controller_name}#destroy"}
+      = link_to "<i class='fa-solid fa-pen-to-square fa-xl'></i>".html_safe, edit_polymorphic_path(objekt), { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("edit"), class: "px-2" }
+      = link_to "<i class='fa-solid fa-trash-can fa-xl'></i>".html_safe, objekt, "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("delete"), data: { "turbo-method": :delete, controller: controller_name, "confirmation-message-value": 'Are you sure?', action: "#{controller_name}#destroy", class: "px-2"}
+      = link_to "<i class='fa-solid fa-solid fa-ban fa-xl'></i>".html_safe, public_send("#{controller_name}_path"), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("cancel"), class: "px-2" } 
+        
+
 
     -elsif action_name == "index"
-      =link_to "<i class='bi bi-pencil-square fs-4'></i>".html_safe, "#{controller_name}/new",{ "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("save_as_pdf") } 
+      =link_to "<i class='fa-solid fa-file-circle-plus fa-xl'></i>".html_safe, "#{controller_name}/new",{ "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("new"), class: "px-2" } 
+
+
+    -elsif action_name == "edit"
+      =link_to "<i class='fa-solid fa-solid fa-ban fa-xl'></i>".html_safe, public_send("#{controller_name}_path"), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("cancel"), class: "px-2" } 
+      =link_to "<i class='fa-solid fa-eye fa-xl'></i>".html_safe, public_send("#{controller_name}_path", objekt), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("show_#{controller_name.singularize}"), class: "px-2" } 
+
+
+
+
+    -elsif action_name == "new"
+      =link_to "<i class='fa-solid fa-solid fa-ban fa-xl'></i>".html_safe, public_send("#{controller_name}_path"), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("cancel"), class: "px-2" } 
         
 
 

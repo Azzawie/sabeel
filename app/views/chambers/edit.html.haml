@@ -1,9 +1,2 @@
-= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("listing_chambers")
-
-%h1 Editing chamber
-
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("show_chamber"), objekt: @chamber
 = render 'form'
-
-= link_to 'Show', @chamber
-\|
-= link_to 'Back', chambers_path

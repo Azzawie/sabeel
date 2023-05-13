@@ -3,7 +3,7 @@
   %table.table.table-striped.table-hover.table-sm.table-bordered
     %thead
       %tr
-        %th=t("name")
+        %th=t("chamber_name")
         %th=t("description")
         %th=t("notes")
         %th=t("date")
@@ -11,19 +11,20 @@
         %th=t("time")
         %th
         %th
+        %th
 
     %tbody
       - @chambers.each do |chamber|
         %tr
-          %td= chamber.name
-          %td= truncate(chamber.description, {})
-          %td= truncate(chamber.notes, {})
-          %td= chamber.created_at.strftime('%Y-%m-%d')
-          %td= I18n.t('day_names')[chamber.created_at.wday]
-          %td= time_in_day(chamber.created_at)
-          %td
-            =link_to chamber_path(chamber), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: chamber.id) } do |i| 
-              %i.bi.bi-eye
-          %td
-            =link_to edit_chamber_path(chamber), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: chamber.id) } do |i| 
-              %i.bi.bi-pencil-square
+          %td.text-center= chamber.name
+          %td.text-center= truncate(chamber.description, {})
+          %td.text-center= truncate(chamber.notes, {})
+          %td.text-center= chamber.created_at.strftime('%Y-%m-%d')
+          %td.text-center= I18n.t('day_names')[chamber.created_at.wday]
+          %td.text-center= time_in_day(chamber.created_at)
+          %td.text-center.text-center
+            =link_to "<i class = 'bi bi-eye fs-5'></i>".html_safe, chamber_path(chamber), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: chamber.id) }  
+          %td.text-center.text-center
+            =link_to "<i class = 'bi bi-pencil-square fs-5'></i>".html_safe, edit_chamber_path(chamber), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: chamber.id) }
+          %td.text-center
+            = link_to "<i class = 'bi bi-trash3 fs-5'></i>".html_safe, chamber, "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("delete"), data: { "turbo-method": :delete, controller: "chambers", "confirmation-message-value": 'Are you sure?', action: "chambers#destroy"}              

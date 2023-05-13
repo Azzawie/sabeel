@@ -8,63 +8,60 @@
       %tr
         %th=t("notes")
         %td= @chamber.notes
-        
+
+%br
 .table-responsive
   %table.table.table-striped.table-hover.table-sm.table-bordered
-    %thead
-      %tr
-        %th=t("age_days")
-        %th=t("age_weeks")
-        %th=t("total_count")
-        %th=t("deceased")
-        %th=t("remaining")
-        %th=t("consumed_food")
-        %th=t("consumed_water")
-        %th=t("daily_production")
-        %th=t("production_ratio")
-        %th=t("highest_temp")
-        %th=t("lowest_temp")
-        %th=t("humidity_ratio")
-        %th=t("date")
-        %th=t("day")
-        %th=t("time")
-        %th
-        %th
-
-    %tbody
-      - @chamber.daily_statements.each do |daily_statement|
+    - if @chamber.has_statements?
+      %thead
+        %tr.table-primary
+          %th{ colspan: 17 }
+            =t("listing_daily_statements")
         %tr
-          %td= daily_statement.age_days
-          %td= daily_statement.age_weeks
-          %td= daily_statement.total_count
-          %td= daily_statement.deceased
-          %td= daily_statement.remaining
-          %td= daily_statement.consumed_food
-          %td= daily_statement.consumed_water
-          %td= daily_statement.daily_production
-          %td= daily_statement.production_ratio
-          %td= daily_statement.highest_temp
-          %td= daily_statement.lowest_temp
-          %td= daily_statement.humidity_ratio
-          %td= daily_statement.created_at.strftime('%Y-%m-%d')
-          %td= I18n.t('day_names')[daily_statement.created_at.wday]
-          %td= time_in_day(daily_statement.created_at)
-          %td
-            =link_to daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: daily_statement.id) } do |i| 
-              %i.bi.bi-eye
-          %td
-            =link_to edit_daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: daily_statement.id) } do |i| 
-              %i.bi.bi-pencil-square
+          %th=t("age_days")
+          %th=t("age_weeks")
+          %th=t("total_count")
+          %th=t("deceased")
+          %th=t("remaining")
+          %th=t("consumed_food")
+          %th=t("consumed_water")
+          %th=t("daily_production")
+          %th=t("production_ratio")
+          %th=t("highest_temp")
+          %th=t("lowest_temp")
+          %th=t("humidity_ratio")
+          %th=t("date")
+          %th=t("day")
+          %th=t("time")
+          %th
+          %th
 
-.py-3
-  .col-md-6.text-center
-    = link_to chambers_path, { class: "btn alpha mx-1" } do
-      %i.bi.bi-arrow-right-circle
-      =t("back") 
-
-    = link_to edit_chamber_path(@chamber), { class: "btn alpha mx-1" }  do
-      %i.bi.bi-pencil-square
-      %span=t("edit", page_name: @chamber.name)
-
-
+      %tbody
+        - @chamber.daily_statements.each do |daily_statement|
+          %tr
+            %td= daily_statement.age_days
+            %td= daily_statement.age_weeks
+            %td= daily_statement.total_count
+            %td= daily_statement.deceased
+            %td= daily_statement.remaining
+            %td= daily_statement.consumed_food
+            %td= daily_statement.consumed_water
+            %td= daily_statement.daily_production
+            %td= daily_statement.production_ratio
+            %td= daily_statement.highest_temp
+            %td= daily_statement.lowest_temp
+            %td= daily_statement.humidity_ratio
+            %td= daily_statement.created_at.strftime('%Y-%m-%d')
+            %td= I18n.t('day_names')[daily_statement.created_at.wday]
+            %td= time_in_day(daily_statement.created_at)
+            %td
+              =link_to daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: daily_statement.id) } do |i| 
+                %i.bi.bi-eye
+            %td
+              =link_to edit_daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: daily_statement.id) } do |i| 
+                %i.bi.bi-pencil-square
+    - else
+      %thead
+        %tr.table-primary
+          %th=t("no_daily_statments")
 
