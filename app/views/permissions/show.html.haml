@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Action name:
+  = @permission.action_name
+%p
+  %b Resource name:
+  = @permission.resource_name
+%p
+  %b Note:
+  = @permission.note
+
+= link_to 'Edit', edit_permission_path(@permission)
+\|
+= link_to 'Back', permissions_path

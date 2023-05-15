@@ -1,7 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+puts 'Creating new permissions if it does not exist already.'
+
+Permission.resources.each do |resource|
+  puts "\t Resource: #{resource}"
+
+  Permission::ACTIONS.each do |action|
+    puts "\t\t Action: #{action} "
+    Permission.where(resource_name: resource, action_name: action).first_or_create!
+  end
+end

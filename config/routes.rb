@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  resources :permissions
   resources :daily_statements
   resources :chambers
-  resources :roles
 
   get 'home/index'
 
@@ -26,6 +26,14 @@ end
 # == Route Map
 #
 #                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
+#                              permissions GET    /permissions(.:format)                                                                            permissions#index
+#                                          POST   /permissions(.:format)                                                                            permissions#create
+#                           new_permission GET    /permissions/new(.:format)                                                                        permissions#new
+#                          edit_permission GET    /permissions/:id/edit(.:format)                                                                   permissions#edit
+#                               permission GET    /permissions/:id(.:format)                                                                        permissions#show
+#                                          PATCH  /permissions/:id(.:format)                                                                        permissions#update
+#                                          PUT    /permissions/:id(.:format)                                                                        permissions#update
+#                                          DELETE /permissions/:id(.:format)                                                                        permissions#destroy
 #                         daily_statements GET    /daily_statements(.:format)                                                                       daily_statements#index
 #                                          POST   /daily_statements(.:format)                                                                       daily_statements#create
 #                      new_daily_statement GET    /daily_statements/new(.:format)                                                                   daily_statements#new
@@ -42,22 +50,6 @@ end
 #                                          PATCH  /chambers/:id(.:format)                                                                           chambers#update
 #                                          PUT    /chambers/:id(.:format)                                                                           chambers#update
 #                                          DELETE /chambers/:id(.:format)                                                                           chambers#destroy
-#                                    roles GET    /roles(.:format)                                                                                  roles#index
-#                                          POST   /roles(.:format)                                                                                  roles#create
-#                                 new_role GET    /roles/new(.:format)                                                                              roles#new
-#                                edit_role GET    /roles/:id/edit(.:format)                                                                         roles#edit
-#                                     role GET    /roles/:id(.:format)                                                                              roles#show
-#                                          PATCH  /roles/:id(.:format)                                                                              roles#update
-#                                          PUT    /roles/:id(.:format)                                                                              roles#update
-#                                          DELETE /roles/:id(.:format)                                                                              roles#destroy
-#                                    users GET    /users(.:format)                                                                                  users#index
-#                                          POST   /users(.:format)                                                                                  users#create
-#                                 new_user GET    /users/new(.:format)                                                                              users#new
-#                                edit_user GET    /users/:id/edit(.:format)                                                                         users#edit
-#                                     user GET    /users/:id(.:format)                                                                              users#show
-#                                          PATCH  /users/:id(.:format)                                                                              users#update
-#                                          PUT    /users/:id(.:format)                                                                              users#update
-#                                          DELETE /users/:id(.:format)                                                                              users#destroy
 #                               home_index GET    /home/index(.:format)                                                                             home#index
 #                         new_user_session GET    /users/sign_in(.:format)                                                                          devise/sessions#new
 #                             user_session POST   /users/sign_in(.:format)                                                                          devise/sessions#create
@@ -75,6 +67,8 @@ end
 #                                          DELETE /users(.:format)                                                                                  devise/registrations#destroy
 #                                          POST   /users(.:format)                                                                                  devise/registrations#create
 #                           users_sign_out GET    /users/sign_out(.:format)                                                                         users/sessions#destroy
+#                            users_sign_in GET    /users/sign_in(.:format)                                                                          users/sessions#create
+#                            users_sign_up GET    /users/sign_up(.:format)                                                                          users/registration#new
 #                                     root GET    /                                                                                                 home#index
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
