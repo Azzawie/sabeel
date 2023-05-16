@@ -12,7 +12,8 @@
 %br
 .table-responsive
   %table.table.table-striped.table-hover.table-sm.table-bordered
-    - if @user.permissions
+    - if @user.all_permissions
+      - user_permissions = @user.all_permissions
       %thead
         %tr.table-primary
           %th{ colspan: 17 }
@@ -22,14 +23,12 @@
           %th=t("users.resource")
           %th
           %th
-
       %tbody
-        - @user.permissions.sort_by(&:resource_name).each do |permission|
+        - Permission.all_permissions.each do |permission|
           %tr
-            %td= action_ar_en_mapper(permission.action_name)
-            %td= permission.resource_name
-            %td
-            %td
+            %td= resource_ar_en_mapper(permission.keys.last)
+            %td= action_ar_en_mapper(permission[permission.keys.last])
+            %td= user_permissions.include?(permission) ? "<i class='fa-solid fa-check'></i>".html_safe : "<i class='fa-solid fa-xmark'></i>".html_safe
     - else
       %thead
         %tr.table-primary

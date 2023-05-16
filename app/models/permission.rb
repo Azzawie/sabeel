@@ -29,4 +29,12 @@ class Permission < ApplicationRecord
     end
     a.compact_blank!
   end
+
+  def self.all_permissions
+    per_list = []
+    all.sort_by(&:resource_name).each do |permission|
+      per_list << ({ permission.resource_name => permission.action_name })
+    end
+    per_list
+  end
 end

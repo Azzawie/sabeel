@@ -39,7 +39,7 @@ class User < ApplicationRecord
   def self.send_sms2
     Twilio::REST::Client.new.messages.create(
       body: 'This is your confirmation code, please don\'t share it with others',
-      from: '+18559293727',
+      from: Rails.application.credentials.dig(:twilio, :phone_number),
       to: '+18728069376'
     )
   end
@@ -69,7 +69,7 @@ class User < ApplicationRecord
 
   def all_permissions
     per_list = []
-    permissions.each do |permission|
+    permissions.sort_by(&:resource_name).each do |permission|
       per_list << ({ permission.resource_name => permission.action_name })
     end
     per_list

@@ -1,4 +1,9 @@
 en:
+  main:
+    users: Users
+    chambers: Chambers
+    daily_statements: Daily statements
+    permissions: Permissions
   chamber_name: Chamber name
   description: Description
   notes: Notes
@@ -34,7 +39,6 @@ en:
   new_daily_statement: New daily statement
   reports: Statements & Reports
   favorite_chambers: favorite chambers
-  users: Users
   show_chamber: Chamber details
   show_daily_statement: Daily statement details
   edit: Edit this record

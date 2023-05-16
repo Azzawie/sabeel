@@ -1,4 +1,9 @@
 ar:
+  main:
+    users: المستخدمين
+    chambers: قاعات
+    daily_statements: تقارير يومية
+    permissions: رخص
   chamber_name: اسم القاعة
   description: التفاصيل
   notes: الملاحظات
@@ -34,7 +39,6 @@ ar:
   new_daily_statement: انشاء قيد تقرير يومي جديد
   reports: كشوفات وتقارير
   favorite_chambers: القاعات المفضلة
-  users: المستخدمين
   show_chamber: تفاصيل القاعة
   show_daily_statement: تفاصيل التقرير اليومي
   edit: تعديل القيد
