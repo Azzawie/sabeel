@@ -2,6 +2,11 @@
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import "@fortawesome/fontawesome-free/css/all";
 
+// Style for flash messages
+// .alert-dismissible {
+//   padding-left: $close-font-size + $alert-padding-x * 2;
+// }
+
 
 th {
   text-align:center;
@@ -42,3 +47,4 @@ a[title]:hover::after {
     padding: 8px 8px;
       font-family: Arial, Helvetica, sans-serif;
 }
+

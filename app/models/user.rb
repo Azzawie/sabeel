@@ -37,39 +37,41 @@ class User < ApplicationRecord
   end
 
   def self.send_sms2
-    require 'rubygems'
-    require 'twilio-ruby'
-    @client = Twilio::REST::Client.new
-
-    message = @client.messages.create(
-      body: 'wwww',
+    Twilio::REST::Client.new.messages.create(
+      body: 'This is your confirmation code, please don\'t share it with others',
       from: '+18559293727',
       to: '+18728069376'
     )
-
-    puts message.sid
-
-    def send_sms1
-      require 'telegram/bot'
-
-      # Replace the value below with your Telegram Bot API token
-      bot_token = '1269757384:AAHDcDazwKy26ZDO_eSpBrsukKcVZ9Mq_bs'
-
-      # Replace the value below with the phone number you want to send the message to
-      phone_number = '8728069376'
-
-      # Replace the value below with the message you want to send
-      message = 'Hello from your Telegram bot!'
-
-      Telegram::Bot::Client.run(bot_token) do |bot|
-        chat_id = bot.api.get_chat_id(chat_id: phone_number).result
-        # bot.api.send_message(chat_id: phone_number, text: message)
-        bot.api.send_message(chat_id:, text: message)
-      end
-    end
   end
 
   def can?(action_name, resource_name)
-    permissions.find_by(action_name: action_name, resource_name: resource_name).present?
+    permissions.find_by(action_name:, resource_name:).present?
+  end
+
+  def all_policies
+    classes = Permission.resources
+
+    policies = {}
+
+    classes.each do |clazz|
+      policy = Pundit.policy(self, clazz.singularize.capitalize.camelcase.constantize)
+
+      next if policy.nil?
+
+      policy.public_methods(false).sort.each do |m|
+        result = policy.send(m)
+        policies["#{clazz}.#{m}"] = result
+      end
+    end
+
+    policies
+  end
+
+  def all_permissions
+    per_list = []
+    permissions.each do |permission|
+      per_list << ({ permission.resource_name => permission.action_name })
+    end
+    per_list
   end
 end

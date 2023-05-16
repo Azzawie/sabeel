@@ -3,24 +3,14 @@ Rails.application.routes.draw do
   resources :daily_statements
   resources :chambers
 
-  get 'home/index'
-
-
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'users/sessions#destroy'
     get '/users/sign_in' => 'users/sessions#create'
     get '/users/sign_up' => 'users/registration#new'
-
   end
-
+  resources :users
   root 'home#index'
-
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
 
 # == Route Map

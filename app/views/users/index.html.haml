@@ -1,23 +1,29 @@
-%h1 Listing users
+:ruby
+  objekt = controller_name.singularize.capitalize.camelcase.constantize
+  
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("users.listing_users"), objekt: objekt
 
-%table
-  %thead
-    %tr
-      %th ID
-      %th EMAIL
-      %th
-      %th
-      %th
-
-  %tbody
-    - @users.each do |user|
+.table-responsive
+  %table.table.table-striped.table-hover.table-sm.table-bordered
+    %thead
       %tr
-        %td= user.id
-        %td= user.email
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+        %th=t("users.email")
+        %th=t("users.phone")
+        %th
+        %th
+        %th
 
-%br
 
-= link_to 'New User', new_user_path
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td.text-center= !user.email ? user.email : t("not_available")
+          %td.text-center= user.phone
+          %td.text-center.text-center
+            =link_to "<i class = 'bi bi-eye fs-5'></i>".html_safe, user_path(user), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: user.id) }  
+          %td.text-center.text-center
+            -if policy(objekt).update?
+              =link_to "<i class = 'bi bi-pencil-square fs-5'></i>".html_safe, edit_user_path(user), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: user.id) }
+          %td.text-center
+            -if policy(objekt).delete?
+              = link_to "<i class = 'bi bi-trash3 fs-5'></i>".html_safe, user, "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("delete"), data: { "turbo-method": :delete, controller: "users", "confirmation-message-value": 'Are you sure?', action: "users#destroy"}              

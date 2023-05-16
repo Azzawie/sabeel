@@ -15,7 +15,7 @@
 #  index_permissions_on_resource_name  (resource_name)
 #
 class Permission < ApplicationRecord
-  ACTIONS = %i[create read update destroy].freeze
+  ACTIONS = %i[create read update destroy index].freeze
   has_many :user_permissions
   has_many :users, through: :user_permissions
   validates :action_name, :resource_name, presence: true

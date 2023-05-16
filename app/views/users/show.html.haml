@@ -1,12 +1,36 @@
-%p#notice= notice
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("users.show_user"), objekt: @user
+.table-responsive
+  %table.table.table-striped.table-hover.table-sm.table-bordered
+    %tbody
+      %tr
+        %th=t("users.email")
+        %td= @user.email
+      %tr
+        %th=t("users.phone")
+        %td= @user.phone
 
-%p
-  %b ID:
-  = @user.id
-%p
-  %b email:
-  = @user.email
+%br
+.table-responsive
+  %table.table.table-striped.table-hover.table-sm.table-bordered
+    - if @user.permissions
+      %thead
+        %tr.table-primary
+          %th{ colspan: 17 }
+            =t("permissions.listing_permissions")
+        %tr
+          %th=t("users.action")
+          %th=t("users.resource")
+          %th
+          %th
 
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+      %tbody
+        - @user.permissions.sort_by(&:resource_name).each do |permission|
+          %tr
+            %td= action_ar_en_mapper(permission.action_name)
+            %td= permission.resource_name
+            %td
+            %td
+    - else
+      %thead
+        %tr.table-primary
+          %th "No permissions yet"

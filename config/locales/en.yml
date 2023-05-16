@@ -21,7 +21,7 @@ en:
   day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
   evening: Evening
   morning: Morning
-  listing_daily_statements: Listing of daily statements
+  listing_daily_statements: Daily statements list
   listing_chambers: Chabers list
   edit: "(%{page_name}) Edit page"
   back: Back
@@ -41,7 +41,66 @@ en:
   delete: Delete this record
   home_page_content: Welcome to our all-in-one chicken hen management application! Our user-friendly tool is designed to help chicken farmers of all sizes keep track of their hens, eggs, and overall environment. With features that allow you to monitor temperature, humidity, and chicken count, you'll always have a clear picture of the health and well-being of your flock. Plus, our customizable alerts and real-time updates make it easy to stay on top of any changes in your environment, so you can take action quickly and keep your hens happy and healthy. And of course, our application still includes all the inventory management features you need, from automatic egg counting to easy data input and access. Whether you're a hobbyist or a commercial farmer, our all-in-one application can help you streamline your operations and ensure the best possible outcomes for your flock. Try it out today and see the difference it can make!
   no_daily_statments: There are no daily statments available for this chamber!
+  not_available: Not available.
+  index: List all records
+  create: Create new records
+  update: Update existing records
+  destroy: Destroy existing records
+  read: Read new records
+
+  chambers:
+    create: Chamber was successfully created.
+    update: Chamber was successfully updated.
+    destroy: Chamber was successfully destroyed.
+
+  daily_statements:
+    create: Daily statement was successfully created.
+    update: Daily statement was successfully updated.
+    destroy: Daily statement was successfully destroyed.
+
+  users:
+    listing_users: List all users.
+    create: User was successfully created.
+    update: User was successfully updated.
+    destroy: User was successfully destroyed.
+    email: Email
+    phone: Phone number
+    action: Action
+    resource: Resource
+    show_user: User details
+
+  permissions:
+    listing_permissions: All permissions list
+
   devise:
     signout: Signout
     signin: Signin
     signup: Signup
+  pundit:
+    chamber_policy:
+      update?: You don't have the permission to Update records
+      new?: You don't have the permission to create new records
+      create?: You don't have the permission to create new records
+      destroy?: You don't have the permission to delete records
+      index?: You don't have the permission to see all records
+      edit?: You don't have the permission to update records
+      read?: You don't have the permission to read records 
+      show?: You don't have the permission to read records 
+    daily_statement_policy:
+      update?: You don't have the permission to Update records
+      new?: You don't have the permission to create new records
+      create?: You don't have the permission to create new records
+      destroy?: You don't have the permission to delete records
+      index?: You don't have the permission to see all records
+      edit?: You don't have the permission to update records
+      read?: You don't have the permission to read records 
+      show?: You don't have the permission to read records 
+    user_policy:
+      update?: You don't have the permission to Update records
+      new?: You don't have the permission to create new records
+      create?: You don't have the permission to create new records
+      destroy?: You don't have the permission to delete records
+      index?: You don't have the permission to see all records
+      edit?: You don't have the permission to update records
+      read?: You don't have the permission to read records 
+      show?: You don't have the permission to read records 

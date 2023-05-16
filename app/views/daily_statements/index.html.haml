@@ -1,4 +1,7 @@
-= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("listing_daily_statements")
+:ruby
+  objekt = controller_name.singularize.capitalize.camelcase.constantize
+
+= render "/layouts/nav", controller_name: controller_name, action_name: action_name, page_name: t("listing_daily_statements"), objekt: objekt
 .table-responsive
   %table.table.table-striped.table-hover.table-sm.table-bordered
     %thead
@@ -45,6 +48,8 @@
           %td.text-center
             =link_to "<i class = 'bi bi-eye fs-5'></i>".html_safe, daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("view_record_with_number", record_number: daily_statement.id) }  
           %td.text-center
-            =link_to "<i class = 'bi bi-pencil-square fs-5'></i>".html_safe, edit_daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: daily_statement.id) }
+            -if policy(objekt).update?
+              =link_to "<i class = 'bi bi-pencil-square fs-5'></i>".html_safe, edit_daily_statement_path(daily_statement), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("edit_record_with_number", record_number: daily_statement.id) }
           %td.text-center
-            = link_to "<i class = 'bi bi-trash3 fs-5'></i>".html_safe, daily_statement, "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("delete"), data: { "turbo-method": :delete, controller: "daily_statements", "confirmation-message-value": 'Are you sure?', action: "daily_statements#destroy"}
+            -if policy(objekt).delete?
+              = link_to "<i class = 'bi bi-trash3 fs-5'></i>".html_safe, daily_statement, "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("delete"), data: { "turbo-method": :delete, controller: "daily_statements", "confirmation-message-value": 'Are you sure?', action: "daily_statements#destroy"}

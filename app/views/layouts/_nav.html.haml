@@ -2,9 +2,9 @@
   controller_name = controller_name
   action_name = action_name
   page_namee = page_name
-  objekt = objekt
+  objekt = objekt ||= controller_name.singularize.capitalize.camelcase.constantize.new
 
-%p#notice= notice
+= render "layouts/flash_messages"
 .py-5.text-center
   %h3=page_name
 
@@ -23,14 +23,17 @@
     = link_to "<i class = 'fa-solid fa-file-pdf fa-xl'></i>".html_safe, root_path, { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("save_as_pdf"), class: "px-2" }
 
     -if action_name == "show"
-      = link_to "<i class='fa-solid fa-pen-to-square fa-xl'></i>".html_safe, edit_polymorphic_path(objekt), { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("edit"), class: "px-2" }
-      = link_to "<i class='fa-solid fa-trash-can fa-xl'></i>".html_safe, objekt, "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("delete"), data: { "turbo-method": :delete, controller: controller_name, "confirmation-message-value": 'Are you sure?', action: "#{controller_name}#destroy", class: "px-2"}
+      -if policy(objekt).update?
+        = link_to "<i class='fa-solid fa-pen-to-square fa-xl'></i>".html_safe, edit_polymorphic_path(objekt), { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("edit"), class: "px-2" }
+      -if policy(objekt).delete?
+        = link_to "<i class='fa-solid fa-trash-can fa-xl'></i>".html_safe, objekt, "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("delete"), data: { "turbo-method": :delete, controller: controller_name, "confirmation-message-value": 'Are you sure?', action: "#{controller_name}#destroy", class: "px-2"}
       = link_to "<i class='fa-solid fa-solid fa-ban fa-xl'></i>".html_safe, public_send("#{controller_name}_path"), { "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("cancel"), class: "px-2" } 
         
 
 
     -elsif action_name == "index"
-      =link_to "<i class='fa-solid fa-file-circle-plus fa-xl'></i>".html_safe, "#{controller_name}/new",{ "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("new"), class: "px-2" } 
+      -if policy(objekt).new?
+        =link_to "<i class='fa-solid fa-file-circle-plus fa-xl'></i>".html_safe, "#{controller_name}/new",{ "data-toggle"=> "tooltip", "data-placement"=> "top", "title"=> t("new"), class: "px-2" } 
 
 
     -elsif action_name == "edit"
