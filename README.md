@@ -13,7 +13,9 @@ Things you may want to cover:
 
 * Deployment instructions (LATER).
 
-* SMS service integration (LATER).
+* SMS service integration: Twilio.
+
+* Authorization service: Pundit.
 
 * Sidekiq queues and services.
 
