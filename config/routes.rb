@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :permissions
   resources :daily_statements
   resources :chambers
+  get 'generate_pdf', to: 'home#generate_pdf'
+  get 'generate_csv', to: 'home#generate_csv'
 
   devise_for :users
   devise_scope :user do

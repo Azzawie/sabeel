@@ -19,8 +19,8 @@
 
 
   .col-12.py-1
-    = link_to "<i class = 'fa-solid fa-file-csv fa-xl'></i>".html_safe, root_path, { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("save_as_excel"), class: "px-2" }
-    = link_to "<i class = 'fa-solid fa-file-pdf fa-xl'></i>".html_safe, root_path, { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("save_as_pdf"), class: "px-2" }
+    = link_to "<i class = 'fa-solid fa-file-csv fa-xl'></i>".html_safe, generate_csv_path, { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("save_as_excel"), class: "px-2" }
+    = link_to "<i class = 'fa-solid fa-file-pdf fa-xl'></i>".html_safe, generate_pdf_path, { "data-toggle" => "tooltip", "data-placement" => "top", "title" => t("save_as_pdf"), class: "px-2" }
 
     -if action_name == "show"
       -if policy(objekt).update?
