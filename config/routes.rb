@@ -12,14 +12,8 @@ Rails.application.routes.draw do
   #   # post '/users/sign_up', to: 'users/registration#new'
   # end
 
-  devise_for :users, controllers: { sessions: 'users/sessions' }
 
-  # devise_for :users do
-  #   # post '/users/sign_in' => 'users/sessions#create'
-  #   delete '/users/sign_out' => 'users/sessions#destroy'
-  #   # post '/users/sign_up' => 'users/registration#new'
-  # end
-
+  devise_for :users, controllers: { registrations: "registrations", sessions: 'sessions' }
   namespace :admin do
     resources :users
   end
