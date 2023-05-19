@@ -5,13 +5,24 @@ Rails.application.routes.draw do
   get 'generate_pdf', to: 'home#generate_pdf'
   get 'generate_csv', to: 'home#generate_csv'
 
-  devise_for :users
-  devise_scope :user do
-    get '/users/sign_out' => 'users/sessions#destroy'
-    get '/users/sign_in' => 'users/sessions#create'
-    get '/users/sign_up' => 'users/registration#new'
+  # devise_for :users
+  # devise_scope :user do
+  #   delete '/users/sign_out', to: 'users/sessions#destroy'
+  #   # post '/users/sign_in', to: 'users/sessions#create'
+  #   # post '/users/sign_up', to: 'users/registration#new'
+  # end
+
+  devise_for :users, controllers: { sessions: 'users/sessions' }
+
+  # devise_for :users do
+  #   # post '/users/sign_in' => 'users/sessions#create'
+  #   delete '/users/sign_out' => 'users/sessions#destroy'
+  #   # post '/users/sign_up' => 'users/registration#new'
+  # end
+
+  namespace :admin do
+    resources :users
   end
-  resources :users
   root 'home#index'
 end
 
@@ -42,7 +53,8 @@ end
 #                                          PATCH  /chambers/:id(.:format)                                                                           chambers#update
 #                                          PUT    /chambers/:id(.:format)                                                                           chambers#update
 #                                          DELETE /chambers/:id(.:format)                                                                           chambers#destroy
-#                               home_index GET    /home/index(.:format)                                                                             home#index
+#                             generate_pdf GET    /generate_pdf(.:format)                                                                           home#generate_pdf
+#                             generate_csv GET    /generate_csv(.:format)                                                                           home#generate_csv
 #                         new_user_session GET    /users/sign_in(.:format)                                                                          devise/sessions#new
 #                             user_session POST   /users/sign_in(.:format)                                                                          devise/sessions#create
 #                     destroy_user_session DELETE /users/sign_out(.:format)                                                                         devise/sessions#destroy
@@ -61,6 +73,14 @@ end
 #                           users_sign_out GET    /users/sign_out(.:format)                                                                         users/sessions#destroy
 #                            users_sign_in GET    /users/sign_in(.:format)                                                                          users/sessions#create
 #                            users_sign_up GET    /users/sign_up(.:format)                                                                          users/registration#new
+#                                    users GET    /users(.:format)                                                                                  users#index
+#                                          POST   /users(.:format)                                                                                  users#create
+#                                 new_user GET    /users/new(.:format)                                                                              users#new
+#                                edit_user GET    /users/:id/edit(.:format)                                                                         users#edit
+#                                     user GET    /users/:id(.:format)                                                                              users#show
+#                                          PATCH  /users/:id(.:format)                                                                              users#update
+#                                          PUT    /users/:id(.:format)                                                                              users#update
+#                                          DELETE /users/:id(.:format)                                                                              users#destroy
 #                                     root GET    /                                                                                                 home#index
 #         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
 #         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume

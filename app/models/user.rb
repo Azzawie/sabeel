@@ -2,19 +2,29 @@
 #
 # Table name: users
 #
-#  id                     :bigint           not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  phone                  :string
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                        :bigint           not null, primary key
+#  authentication_token      :string           not null
+#  current_sign_in_at        :datetime
+#  email                     :string           default(""), not null
+#  encrypted_password        :string           default(""), not null
+#  fname                     :string           not null
+#  is_verified               :boolean          default(FALSE), not null
+#  last_sign_in_at           :datetime
+#  lname                     :string           not null
+#  phone                     :string
+#  remember_created_at       :datetime
+#  reset_password_sent_at    :datetime
+#  reset_password_token      :string
+#  sign_in_count             :integer          default(0), not null
+#  verification_code         :string
+#  verification_code_sent_at :datetime
+#  verified_at               :datetime
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_phone                 (phone) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
@@ -28,12 +38,18 @@ class User < ApplicationRecord
 
   validates :phone, uniqueness: true
 
+  before_create :generate_token
+
   def email_required?
     false
   end
 
   def email_changed?
     false
+  end
+
+  def has_permissions?
+    permissions.any?
   end
 
   def self.send_sms2
@@ -73,5 +89,12 @@ class User < ApplicationRecord
       per_list << ({ permission.resource_name => permission.action_name })
     end
     per_list
+  end
+
+  protected
+
+  def generate_token
+    self.authentication_token = SecureRandom.urlsafe_base64
+    generate_token if User.exists?(authentication_token:)
   end
 end
