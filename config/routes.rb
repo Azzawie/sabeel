@@ -5,18 +5,9 @@ Rails.application.routes.draw do
   get 'generate_pdf', to: 'home#generate_pdf'
   get 'generate_csv', to: 'home#generate_csv'
 
-  # devise_for :users
-  # devise_scope :user do
-  #   delete '/users/sign_out', to: 'users/sessions#destroy'
-  #   # post '/users/sign_in', to: 'users/sessions#create'
-  #   # post '/users/sign_up', to: 'users/registration#new'
-  # end
+  devise_for :users
+  resources :users
 
-
-  devise_for :users, controllers: { registrations: "registrations", sessions: 'sessions' }
-  namespace :admin do
-    resources :users
-  end
   root 'home#index'
 end
 

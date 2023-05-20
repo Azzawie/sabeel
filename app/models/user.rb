@@ -31,14 +31,14 @@ class User < ApplicationRecord
   extend Devise::Models
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable#, :validatable No need for email vaildation so we stoped it.
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable # , :validatable No need for email vaildation so we stoped it.
 
-  has_many :user_permissions
+  has_many :user_permissions,dependent: :destroy
   has_many :permissions, through: :user_permissions
 
   validates :phone, uniqueness: true
 
-  before_create :generate_token
+  before_create :generate_authentication_token!
 
   def email_required?
     false
@@ -90,11 +90,12 @@ class User < ApplicationRecord
     end
     per_list
   end
-
-  protected
-
-  def generate_token
-    self.authentication_token = SecureRandom.urlsafe_base64
-    generate_token if User.exists?(authentication_token:)
+ # Generate a unique identification token for user
+  def generate_authentication_token!
+    loop do
+      self.authentication_token = Devise.friendly_token
+      break unless self.class.exists?(authentication_token:)
+    end
   end
+ 
 end

@@ -15,7 +15,7 @@
           %a.nav-link.py-3.px-2{"data-bs-original-title" => "Dashboard", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: "#", title: t("reports")}
             %i.bi-speedometer2.fs-3
         %li.nav-item
-          %a.nav-link.py-3.px-2{"data-bs-original-title" => "All users", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: admin_users_path, title: t("users.listing_users")}
+          %a.nav-link.py-3.px-2{"data-bs-original-title" => "All users", "data-bs-placement" => "bottom", "data-bs-toggle" => "tooltip", href: users_path, title: t("users.listing_users")}
             %i.fa-solid.fa-users.fa-xl
         %li.nav-item
           = link_to "<i class='fa-solid fa-arrow-right-from-bracket fa-xl'></i>".html_safe, destroy_user_session_path, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}

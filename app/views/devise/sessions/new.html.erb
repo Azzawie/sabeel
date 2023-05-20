@@ -7,6 +7,12 @@
   </div>
 
   <div class="field">
+    Phone
+    <br />
+    <%= f.text_field :phone, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
