@@ -4,8 +4,17 @@ class Api::V1::SessionsController < Devise::SessionsController
   before_action :sign_in_params, only: :create
 
   skip_before_action :verify_authenticity_token, only: %i[create signout]
-  # respond_to :json
 
+
+  # api/v1/sign_in.json
+  # {
+  #   "user": {
+  #       "email": "",
+  #       "phone": "8728069376",
+  #       "password": "123123",
+  #       "remember_me": "0"
+  #   }
+  # }
   def create
     user_phone = sign_in_params[:phone]
     password = sign_in_params[:password]
@@ -25,6 +34,8 @@ class Api::V1::SessionsController < Devise::SessionsController
     end
   end
 
+  # api/v1/sign_out.json
+  # Should pass bearer_token
   def signout
     user = User.find_by(authentication_token: bearer_token)
 

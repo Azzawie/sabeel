@@ -4,6 +4,18 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   skip_before_action :verify_authenticity_token, only: %i[create signout]
   before_action :configure_sign_up_params, only: [:create]
 
+  # /api/v1/sign_up.json
+  # {
+  #   "user": {
+  #       "fname": "1112223334",
+  #       "lname": "1112223334",
+  #       "email": "ddd@2.com",
+  #       "phone": "0980972280722229",
+  #       "password": "123123",
+  #       "password_confirmation": "123123",
+  #       "remember_me": "0"
+  #   }
+  # }
   def respond_with(resource, _opts = {})
     if resource.errors.any?
       # errors_messages = []
