@@ -5,9 +5,23 @@ Rails.application.routes.draw do
   get 'generate_pdf', to: 'home#generate_pdf'
   get 'generate_csv', to: 'home#generate_csv'
 
-  devise_for :users
-  resources :users
+  devise_scope :user do
+    # delete '/users/sign_out', to: 'sessions#sign_out'
+    # post '/users/sign_in', to: 'sessions#sign_in'
+    # post '/users/sign_up', to: 'registration#new'
+  end
 
+  devise_for :users
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      devise_scope :user do
+        post 'sign_up', to: 'registrations#create'
+        post 'sign_in', to: 'sessions#create'
+        delete 'sign_out', to: 'sessions#signout'
+      end
+    end
+  end
+  resources :users
   root 'home#index'
 end
 

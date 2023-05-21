@@ -31,7 +31,7 @@ class User < ApplicationRecord
   extend Devise::Models
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable # , :validatable No need for email vaildation so we stoped it.
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable# No need for email vaildation so we stoped it.
 
   has_many :user_permissions,dependent: :destroy
   has_many :permissions, through: :user_permissions
@@ -39,6 +39,12 @@ class User < ApplicationRecord
   validates :phone, uniqueness: true
 
   before_create :generate_authentication_token!
+
+
+
+  def self.valid_phone?(phone)
+    true
+  end
 
   def email_required?
     false
