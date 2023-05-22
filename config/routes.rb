@@ -5,12 +5,6 @@ Rails.application.routes.draw do
   get 'generate_pdf', to: 'home#generate_pdf'
   get 'generate_csv', to: 'home#generate_csv'
 
-  devise_scope :user do
-    # delete '/users/sign_out', to: 'sessions#sign_out'
-    # post '/users/sign_in', to: 'sessions#sign_in'
-    # post '/users/sign_up', to: 'registration#new'
-  end
-
   devise_for :users
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -69,9 +63,9 @@ end
 #                                          PUT    /users(.:format)                                                                                  devise/registrations#update
 #                                          DELETE /users(.:format)                                                                                  devise/registrations#destroy
 #                                          POST   /users(.:format)                                                                                  devise/registrations#create
-#                           users_sign_out GET    /users/sign_out(.:format)                                                                         users/sessions#destroy
-#                            users_sign_in GET    /users/sign_in(.:format)                                                                          users/sessions#create
-#                            users_sign_up GET    /users/sign_up(.:format)                                                                          users/registration#new
+#                           api_v1_sign_up POST   /api/v1/sign_up(.:format)                                                                         api/v1/registrations#create {:format=>:json}
+#                           api_v1_sign_in POST   /api/v1/sign_in(.:format)                                                                         api/v1/sessions#create {:format=>:json}
+#                          api_v1_sign_out DELETE /api/v1/sign_out(.:format)                                                                        api/v1/sessions#signout {:format=>:json}
 #                                    users GET    /users(.:format)                                                                                  users#index
 #                                          POST   /users(.:format)                                                                                  users#create
 #                                 new_user GET    /users/new(.:format)                                                                              users#new
