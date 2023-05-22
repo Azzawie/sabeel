@@ -279,6 +279,9 @@ en:
     destroy: Daily statement was successfully destroyed.
 
   users:
+    fname: First name
+    lname: Last name
+    full_name: Full name
     listing_users: List all users.
     create: User was successfully created.
     update: User was successfully updated.

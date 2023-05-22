@@ -23,20 +23,22 @@ Permission.all.each do |permission|
   UserPermission.create(user_id: user.id, permission_id: permission.id)
 end
 
-10.times do |i|
+1.upto(10) do |i|
   c = Chamber.create!(name: "Chamber-#{i}", description: "description-for-#{i}")
-  c.daily_statements.create(
-    age_days: i,
-    age_weeks: i,
-    consumed_food: i,
-    consumed_water: i,
-    daily_production: i,
-    deceased: i,
-    highest_temp: i,
-    humidity_ratio: i,
-    lowest_temp: i,
-    production_ratio: i,
-    remaining: i,
-    total_count: i
-  )
+  1.upto(10) do |ds|
+    c.daily_statements.create(
+      age_days: ds,
+      age_weeks: ds,
+      consumed_food: ds,
+      consumed_water: ds,
+      daily_production: ds,
+      deceased: ds,
+      highest_temp: ds,
+      humidity_ratio: ds,
+      lowest_temp: ds,
+      production_ratio: ds,
+      remaining: ds,
+      total_count: ds
+    )
+  end
 end

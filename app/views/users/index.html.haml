@@ -7,6 +7,7 @@
   %table.table.table-striped.table-hover.table-sm.table-bordered
     %thead
       %tr
+        %th=t("users.full_name")
         %th=t("users.email")
         %th=t("users.phone")
         %th
@@ -17,6 +18,7 @@
     %tbody
       - @users.each do |user|
         %tr
+          %td.text-center= user.full_name
           %td.text-center= !user.email ? user.email : t("not_available")
           %td.text-center= user.phone
           %td.text-center.text-center

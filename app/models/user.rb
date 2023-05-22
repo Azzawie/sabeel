@@ -40,6 +40,9 @@ class User < ApplicationRecord
   before_create :generate_authentication_token!
 
 
+  def full_name
+    "#{fname} #{lname}"
+  end
 
   def self.valid_phone?(phone)
     true
