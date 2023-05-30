@@ -20,6 +20,4 @@
         %td= link_to 'Edit', edit_permission_path(permission)
         %td= link_to 'Destroy', permission, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
-
-= link_to 'New Permission', new_permission_path
+= paginate @permissions

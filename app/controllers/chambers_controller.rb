@@ -3,7 +3,7 @@ class ChambersController < ApplicationController
 
   # GET /chambers or /chambers.json
   def index
-    @chambers = Chamber.all
+    @chambers = Chamber.all.page(params[:page])
     authorize @chambers
   end
 

@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
-  resources :permissions
-  resources :daily_statements
-  resources :chambers
+  resources :permissions do
+    get '/page/:page', action: :index, on: :collection
+  end
+
+  resources :daily_statements do
+    get '/page/:page', action: :index, on: :collection
+  end
+
+  resources :chambers do
+    get '/page/:page', action: :index, on: :collection
+  end
+
   get 'generate_pdf', to: 'home#generate_pdf'
   get 'generate_csv', to: 'home#generate_csv'
 

@@ -3,7 +3,7 @@ class PermissionsController < ApplicationController
 
   # GET /permissions or /permissions.json
   def index
-    @permissions = Permission.all
+    @permissions = Permission.all.page(params[:page])
   end
 
   # GET /permissions/1 or /permissions/1.json

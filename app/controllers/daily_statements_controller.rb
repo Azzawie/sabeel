@@ -3,7 +3,7 @@ class DailyStatementsController < ApplicationController
 
   # GET /daily_statements or /daily_statements.json
   def index
-    @daily_statements = DailyStatement.all
+    @daily_statements = DailyStatement.all.page(params[:page])
     authorize @daily_statements
   end
 
