@@ -398,3 +398,22 @@ ar:
       read?: ليس لديك الصلاحية لمشاهدة القيود 
       show?: ليس لديك الصلاحية لمشاهدة القيود 
       new?: ليس لديك الصلاحية لانشاء قيد جديد
+
+
+# For pagination
+  views:
+    pagination:
+      first: "&laquo; الاول"
+      last: "الاخير &raquo;"
+      previous: "&lsaquo; السابق"
+      next: "اللاحق &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "مشاهدة <b>1</b> %{entry_name}"
+          other: "مشاهدة <b>جميع %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "عرض %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> من <b>%{total}</b>  المجموع الكلي"
