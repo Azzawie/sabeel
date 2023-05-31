@@ -1,9 +1,9 @@
-class Api::V1::SessionsController < Devise::SessionsController
-  include Api::Concerns::Authenticable
+class Api::V1::SessionsController < ApplicationController
 
   before_action :sign_in_params, only: :create
 
   skip_before_action :verify_authenticity_token, only: %i[create signout]
+  skip_before_action :authenticate_user_with_token!, except: [:creaate]
 
 
   # api/v1/sign_in.json
