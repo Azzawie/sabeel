@@ -1,5 +1,4 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
-  include Api::Concerns::Authenticable
   before_action :authenticate_user_with_token!, except: [:create]
   skip_before_action :verify_authenticity_token, only: %i[create signout]
   before_action :configure_sign_up_params, only: [:create]
