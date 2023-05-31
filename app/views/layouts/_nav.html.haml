@@ -1,10 +1,9 @@
 :ruby
   controller_name = controller_name
   action_name = action_name
-  page_namee = page_name
+  page_name = page_name
   objekt = objekt ||= controller_name.singularize.capitalize.camelcase.constantize.new
 
-= render "layouts/flash_messages"
 .py-5.text-center
   %h3=page_name
 
