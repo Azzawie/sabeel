@@ -17,6 +17,15 @@ Rails.application.routes.draw do
   devise_for :users
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      resources :chambers do
+        get '/page/:page', action: :index, on: :collection
+      end
+      resources :daily_statements do
+        get '/page/:page', action: :index, on: :collection
+      end
+      resources :permissions do
+        get '/page/:page', action: :index, on: :collection
+      end
       devise_scope :user do
         post 'sign_up', to: 'registrations#create'
         post 'sign_in', to: 'sessions#create'
