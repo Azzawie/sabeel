@@ -10,11 +10,10 @@ module Authenticable
   end
 
   def authenticate_user_with_token!
-    if user_signed_in?
-      render json: { errors: 'OK' }, status: :ok
-    else
-      render json: { errors: 'Not authenticated' }, status: :unauthorized
-    end
+    return if user_signed_in?
+
+    api_render(http_code: :unauthorized, success: false, response_code: 401,
+               response_msg: 'Please sign in to access this page.')
   end
 
   def user_signed_in?
@@ -28,7 +27,7 @@ module Authenticable
   def bearer_token
     pattern = /^Bearer /
     header  = request.headers['Authorization']
-    header.gsub(pattern, '') if header && header.match(pattern)
+    header.gsub(pattern, '') if header&.match(pattern)
   end
 
   def api_render(auth_token: nil, success: true, response_code: 200, response_msg: '', data: {}, http_code: 200)
