@@ -62,6 +62,8 @@ class ChambersController < ApplicationController
 
   private
 
+  ##
+  # This function authorizes access to a chamber object.
   def authorize_chamber
     authorize @chamber
   end

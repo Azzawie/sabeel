@@ -1,5 +1,6 @@
 class DailyStatementsController < ApplicationController
   before_action :set_daily_statement, only: %i[show edit update destroy]
+  before_action :authorize_daily_statement, except: [:index]
 
   # GET /daily_statements or /daily_statements.json
   def index
@@ -8,27 +9,19 @@ class DailyStatementsController < ApplicationController
   end
 
   # GET /daily_statements/1 or /daily_statements/1.json
-  def show
-    # No need to pass an object just the class neme
-    authorize DailyStatement
-  end
+  def show; end
 
   # GET /daily_statements/new
   def new
     @daily_statement = DailyStatement.new
-    authorize @daily_statement
   end
 
   # GET /daily_statements/1/edit
-  def edit
-    # No need to pass an object just the class neme
-    authorize DailyStatement
-  end
+  def edit; end
 
   # POST /daily_statements or /daily_statements.json
   def create
     @daily_statement = DailyStatement.new(daily_statement_params)
-    authorize @daily_statement
 
     respond_to do |format|
       if @daily_statement.save
@@ -44,7 +37,6 @@ class DailyStatementsController < ApplicationController
   # PATCH/PUT /daily_statements/1 or /daily_statements/1.json
   def update
     # No need to pass an object just the class neme
-    authorize DailyStatement
     respond_to do |format|
       if @daily_statement.update(daily_statement_params)
         format.html { redirect_to daily_statement_url(@daily_statement), success: t('daily_statements.update') }
@@ -58,7 +50,6 @@ class DailyStatementsController < ApplicationController
 
   # DELETE /daily_statements/1 or /daily_statements/1.json
   def destroy
-    authorize @daily_statement
     @daily_statement.destroy
 
     respond_to do |format|
@@ -68,6 +59,12 @@ class DailyStatementsController < ApplicationController
   end
 
   private
+
+  ##
+  # This function authorizes a daily statement.
+  def authorize_daily_statement
+    authorize @daily_statement
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_daily_statement

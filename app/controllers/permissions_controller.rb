@@ -1,14 +1,15 @@
 class PermissionsController < ApplicationController
-  before_action :set_permission, only: %i[ show edit update destroy ]
+  before_action :set_permission, only: %i[show edit update destroy]
+  before_action :authorize_permission, except: [:index]
 
   # GET /permissions or /permissions.json
   def index
     @permissions = Permission.all.page(params[:page])
+    authorize @permissions
   end
 
   # GET /permissions/1 or /permissions/1.json
-  def show
-  end
+  def show; end
 
   # GET /permissions/new
   def new
@@ -16,8 +17,7 @@ class PermissionsController < ApplicationController
   end
 
   # GET /permissions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /permissions or /permissions.json
   def create
@@ -25,7 +25,7 @@ class PermissionsController < ApplicationController
 
     respond_to do |format|
       if @permission.save
-        format.html { redirect_to permission_url(@permission), notice: "Permission was successfully created." }
+        format.html { redirect_to permission_url(@permission), notice: 'Permission was successfully created.' }
         format.json { render :show, status: :created, location: @permission }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class PermissionsController < ApplicationController
   def update
     respond_to do |format|
       if @permission.update(permission_params)
-        format.html { redirect_to permission_url(@permission), notice: "Permission was successfully updated." }
+        format.html { redirect_to permission_url(@permission), notice: 'Permission was successfully updated.' }
         format.json { render :show, status: :ok, location: @permission }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +52,26 @@ class PermissionsController < ApplicationController
     @permission.destroy
 
     respond_to do |format|
-      format.html { redirect_to permissions_url, notice: "Permission was successfully destroyed." }
+      format.html { redirect_to permissions_url, notice: 'Permission was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_permission
-      @permission = Permission.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def permission_params
-      params.require(:permission).permit(:action_name, :resource_name, :note)
-    end
+  ##
+  # This is a Ruby function that authorizes access to a permission object.
+  def authorize_permission
+    authorize @permission
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_permission
+    @permission = Permission.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def permission_params
+    params.require(:permission).permit(:action_name, :resource_name, :note)
+  end
 end
