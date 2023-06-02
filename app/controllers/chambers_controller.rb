@@ -1,5 +1,6 @@
 class ChambersController < ApplicationController
   before_action :set_chamber, only: %i[show edit update destroy]
+  before_action :authorize_chamber, except: [:index]
 
   # GET /chambers or /chambers.json
   def index
@@ -10,25 +11,19 @@ class ChambersController < ApplicationController
   # GET /chambers/1 or /chambers/1.json
   def show
     # No need to pass an object just the class neme
-    authorize @chamber
   end
 
   # GET /chambers/new
   def new
     @chamber = Chamber.new
-    authorize @chamber
   end
 
   # GET /chambers/1/edit
-  def edit
-    # No need to pass an object just the class neme
-    authorize Chamber.new
-  end
+  def edit; end
 
   # POST /chambers or /chambers.json
   def create
     @chamber = Chamber.new(chamber_params)
-    authorize @chamber
 
     respond_to do |format|
       if @chamber.save
@@ -44,7 +39,6 @@ class ChambersController < ApplicationController
   # PATCH/PUT /chambers/1 or /chambers/1.json
   def update
     # No need to pass an object just the class neme
-    authorize @chamber
     respond_to do |format|
       if @chamber.update(chamber_params)
         format.html { redirect_to chamber_url(@chamber), success: t('chambers.update') }
@@ -67,6 +61,10 @@ class ChambersController < ApplicationController
   end
 
   private
+
+  def authorize_chamber
+    authorize @chamber
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_chamber
