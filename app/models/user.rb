@@ -30,21 +30,20 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable# No need for email vaildation so we stoped it.
+  devise :database_authenticatable, :registerable, :validatable, :recoverable, :rememberable, authentication_keys: [:phone_number]
 
-  has_many :user_permissions,dependent: :destroy
+  has_many :user_permissions, dependent: :destroy
   has_many :permissions, through: :user_permissions
 
   validates :phone, uniqueness: true
 
   before_create :generate_authentication_token!
 
-
   def full_name
     "#{fname} #{lname}"
   end
 
-  def self.valid_phone?(phone)
+  def self.valid_phone?(_phone)
     true
   end
 
@@ -98,12 +97,12 @@ class User < ApplicationRecord
     end
     per_list
   end
- # Generate a unique identification token for user
+
+  # Generate a unique identification token for user
   def generate_authentication_token!
     loop do
       self.authentication_token = Devise.friendly_token
       break unless self.class.exists?(authentication_token:)
     end
   end
- 
 end
