@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def user_not_authorized(_exception)
     # policy_name = exception.policy.class.to_s.underscore
     # "#{policy_name} #{exception}"
-    error_msg = 'You are not authorized to perform this action.'
+    error_msg = "Sorry, you don't have permission to perform this action."
     respond_to do |format|
       format.json { api_render(http_code: 422, success: false, response_code: 422, response_msg: error_msg) }
       format.html { redirect_back fallback_location: root_path, alert: error_msg }
@@ -26,14 +26,5 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[fname lname phone])
-  end
-
-  def api_render(auth_token: nil, success: true, response_code: 200, response_msg: '', data: {}, http_code: 200)
-    hash = { success:,
-             response_code:,
-             response_msg:,
-             auth_token:,
-             data: }
-    render json: hash, status: http_code
   end
 end
