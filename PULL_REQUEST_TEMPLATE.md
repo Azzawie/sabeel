@@ -1,12 +1,9 @@
-## Description
-<!-- Describe the purpose of this pull request -->
+## Targeted Release
+<!-- Enter the release version that this pull request targets -->
 
-## Changes Made
-<!-- Describe the changes you made in this pull request -->
+## Jira Tickets.
+<!-- List Jira ticket/s using the below format-->
+- [Title](Link)
 
-## Checklist
-- [ ] I have reviewed my code
-- [ ] I have followed the coding style guidelines
-- [ ] I have tested my changes
-- [ ] I have updated documentation as needed
-- [ ] I have added unit tests (if applicable)
+## Database Changes.
+<!-- List all database changes, if any -->
